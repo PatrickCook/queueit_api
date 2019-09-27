@@ -1,3 +1,3 @@
 class Song < ApplicationRecord
-  belongs_to :queue
+  belongs_to :group_queue
 end
