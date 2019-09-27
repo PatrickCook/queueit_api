@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyText
+  is_playing: false
+  user: one
+  cur_members: 1
+  max_memebers: 1
+  cur_songs: 1
+  max_songs: 1
+  is_private: MyText
+  password_hash: MyText
+
+two:
+  name: MyText
+  is_playing: false
+  user: two
+  cur_members: 1
+  max_memebers: 1
+  cur_songs: 1
+  max_songs: 1
+  is_private: MyText
+  password_hash: MyText
