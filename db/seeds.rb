@@ -5,3 +5,14 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+admin = User.create(username: "admin", password_hash: "admin_password_hash")
+
+admin_queue = admin.group_queues.create(name: "admin_queue")
+
+admin_queue.songs.create(
+  title: "Never Let Me Go",
+  artist: "Attom",
+  album_image_url: "https://i.scdn.co/image/a1fa07fbc51393d2f60ae631af9ec0f3797c84d7",
+  spotify_uri: ""
+)
