@@ -1,5 +1,7 @@
 module Api
   class UsersController < Api::ApiController
+    rescue_from ActiveRecord::RecordNotUnique, :with => :record_not_unique
+
     def index
       users = User.all
 
@@ -13,6 +15,13 @@ module Api
     end
 
     def create
+      @user = User.new(user_params)
+      @user.save
+
+      render :json => {
+        :status => "ok",
+        :user => @user.to_json(:only => [:id, :username])
+      }
     end
 
     def show
@@ -31,6 +40,16 @@ module Api
     end
 
     def destroy
+    end
+
+    private
+    def record_not_unique
+      render :status => :conflict,
+        :json => {:status => "error", :message => "Cannot create non-unique user"}
+    end
+
+    def user_params
+      params.require(:user).permit(:username, :first_name, :last_name, :password_hash, :role)
     end
   end
 end
