@@ -11,6 +11,7 @@
 
 class User < ApplicationRecord
   has_many :group_queues
+  has_and_belongs_to_many :queues, class_name: "GroupQueue"
 
   validates :username, uniqueness: true, presence: true
   validates :first_name, presence: true

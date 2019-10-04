@@ -1,8 +1,8 @@
 module Api
   class GroupQueuesController < Api::ApiController
     def index
-      queues = GroupQueue.all
-      render :json => {:status => "ok", :queues => queues.to_json}
+      @queues = GroupQueue.all
+      render :json => { :status => "ok", :queues => @queues }
     end
 
     def new
@@ -12,8 +12,8 @@ module Api
     end
 
     def show
-      group_queue = GroupQueue.find(params[:id])
-      render :json => {:status => "ok", :queue => group_queue.to_json}
+      @group_queue = GroupQueue.find(params[:id])
+      render :json => { :status => "ok", :queue => @group_queue }
     end
 
     def edit
