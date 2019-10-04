@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_04_221755) do
+ActiveRecord::Schema.define(version: 2019_10_04_224909) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2019_10_04_221755) do
     t.boolean "is_playing", default: false, null: false
     t.bigint "user_id"
     t.integer "cur_members", default: 0
-    t.integer "max_memebers", default: 20
+    t.integer "max_members", default: 20
     t.integer "cur_songs", default: 0
     t.integer "max_songs", default: 20
     t.boolean "is_private", default: false, null: false

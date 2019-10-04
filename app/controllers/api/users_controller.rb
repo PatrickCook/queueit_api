@@ -23,7 +23,7 @@ module Api
 
     def update
       @user = User.find(params[:id])
-      puts user_params
+
       if @user.update_attributes(user_params)
         render status: :ok, json: { status: "ok", user: @user }
       else
