@@ -17,4 +17,7 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :role, inclusion: { in: 0..2 } # 0 - default, 1 - admin, 2 - TBD
 
+  private
+
+  attr_reader :password_hash
 end

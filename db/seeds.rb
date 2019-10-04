@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-admin = User.create(username: "admin", password_hash: "admin_password_hash")
+admin = User.create(username: "admin", first_name: "John", last_name: "Doe", password_hash: "admin_password_hash")
 
 admin_queue = admin.group_queues.create(name: "admin_queue")
 
