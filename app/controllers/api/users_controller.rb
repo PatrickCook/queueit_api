@@ -4,11 +4,7 @@ module Api
 
     def index
       users = User.all
-
-      render :json => {
-        :status => "ok",
-        :users => users.to_json(:only => [:id, :username])
-      }
+      render json: { status: "ok", user: users.to_json(:only => [:id, :username]) }
     end
 
     def new
@@ -38,10 +34,6 @@ module Api
     end
 
     private
-    def record_not_unique
-      render x:status => :conflict,
-        :json => {:status => "error", :message => "Cannot create non-unique user"}
-    end
 
     def user_params
       params.require(:user).permit(:username, :first_name, :last_name, :password_hash, :role)
