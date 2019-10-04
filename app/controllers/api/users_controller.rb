@@ -16,7 +16,17 @@ module Api
 
     def create
       @user = User.new(user_params)
-      @user.save
+      if @user.save
+        render :json => {
+          :status => "ok",
+          :user => @user.to_json(:only => [:id, :username])
+        }
+      else
+        render :json => {
+          :status => "ok",
+          :user => @user.to_json(:only => [:id, :username])
+        }
+      end
 
       render :json => {
         :status => "ok",
@@ -44,7 +54,7 @@ module Api
 
     private
     def record_not_unique
-      render :status => :conflict,
+      render x:status => :conflict,
         :json => {:status => "error", :message => "Cannot create non-unique user"}
     end
 
