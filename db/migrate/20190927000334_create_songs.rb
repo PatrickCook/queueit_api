@@ -8,7 +8,7 @@ class CreateSongs < ActiveRecord::Migration[5.2]
       t.text :spotify_uri, null: false
       t.boolean :is_playing, null: false, default: false
       t.boolean :has_played, null: false, default: false
-      t.references :group_queue, foreign_key: true, null: false
+      t.references :group, foreign_key: true, null: false
 
       t.timestamps
     end

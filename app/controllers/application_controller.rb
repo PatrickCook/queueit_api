@@ -8,4 +8,9 @@ class ApplicationController < ActionController::API
     @current_user = AuthorizeApiRequest.call(request.headers).result
     render json: { error: 'Not Authorized' }, status: 401 unless @current_user
   end
+
+  def require_member_of_queue
+    queue = Group.find(params[:group_id])
+    queue.members.include?(@current_user)
+  end
 end
