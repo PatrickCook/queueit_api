@@ -73,5 +73,9 @@ module Api
     def queue_params
       params.require(:queue).permit(:name, :is_playing, :is_private, :password_hash, :max_members, :max_songs)
     end
+
+    def queue_params_password
+      queue_params[:password_hash] if queue_params[:password_hash].present
+    end
   end
 end

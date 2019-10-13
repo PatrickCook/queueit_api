@@ -5,10 +5,10 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :create, :update, :destroy]
 
-  resources :group_queues, only: [:index, :create, :update, :destroy] do
+  resources :groups, only: [:index, :create, :update, :destroy] do
     post "/join", to: "groups#join"
     post "/leave", to: "groups#leave"
-    
+
     resources :songs, only: [:index, :create, :destroy] do
       post "/upvote", to: "votes#create"
       delete "/downvote", to: "votes#destroy"
