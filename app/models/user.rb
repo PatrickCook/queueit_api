@@ -3,7 +3,7 @@ class User < ApplicationRecord
 
   has_many :votes
   has_many :owned_queues, :class_name => :group, foreign_key: 'owner_id'
-  has_and_belongs_to_many :groups
+  has_and_belongs_to_many :joined_queues, :class_name => group
 
   validates :email, uniqueness: true, presence: true
 end
