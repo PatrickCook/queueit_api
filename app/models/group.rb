@@ -15,7 +15,7 @@
 
 class Group < ApplicationRecord
   has_many :songs
-  belongs_to :owner, class_name: :user
+  belongs_to :owner, class_name: "User"
 
   has_and_belongs_to_many :users
 
