@@ -1,17 +1,20 @@
 Rails.application.routes.draw do
   root to: "api#index"
 
+  # PUBLIC ROUTES
+  post 'users', to: "users#create"
   post 'authenticate', to: 'authentication#authenticate'
 
-  resources :users, only: [:index, :create, :update, :destroy]
+  # PRIVATE ROUTES
+  resources :users, only: [:index, :show, :update, :destroy]
 
-  resources :groups, only: [:index, :create, :update, :destroy] do
-    post "/join", to: "groups#join"
-    post "/leave", to: "groups#leave"
+  resources :groups, only: [:index, :create, :show, :update, :destroy] do
+    post "join", to: "groups#join"
+    post "leave", to: "groups#leave"
 
-    resources :songs, only: [:index, :create, :destroy] do
-      post "/upvote", to: "votes#create"
-      delete "/downvote", to: "votes#destroy"
+    resources :songs, only: [:index, :create, :show, :destroy] do
+      post "upvote", to: "votes#create"
+      delete "downvote", to: "votes#destroy"
     end
   end
 end

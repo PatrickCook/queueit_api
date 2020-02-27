@@ -1,46 +1,50 @@
 class SongsController < ApplicationController
+  before_action :set_group
+
   def index
-    @songs = Song.all
-    render :json => {status:"ok", songs: @songs}
+    render json: @group.songs, each_serializer: SongSerializer
   end
 
   def create
-    @song = Song.create(song_params)
-    @queue = Group.find(params[:group_id])
+    song = @group.songs.create(song_params)
 
-    if @song.save
-      render status: :created, json: { status: "ok", song: @song }
+    if song
+      render status: :created, json: song, serializer: SongSerializer
     else
-      render status: :bad_request, json: { status: "error", message: @song.errors.full_message }
+      render status: :bad_request, json: { status: "error", message: song.errors.full_message }
     end
   end
 
   def show
-    @song = Song.find(params[:id])
-    render status: :ok, json: { status: "ok", songs: @song }
+    song = @group.songs.find(params[:id])
+    render status: :ok, json: song, serializer: SongSerializer
   end
 
   def update
-    @song = Song.find(params[:id])
+    song = @group.songs.find(params[:id])
 
-    if @song.update_attributes(song_params)
-      render status: :created, json: { status: "ok", song: @song }
+    if song.update_attributes(song_params)
+      render status: :created, json: song, serializer: SongSerializer
     else
-      render status: :bad_request, json: { status: "error", message: @song.errors.full_message }
+      render status: :bad_request, json: { status: "error", message: song.errors.full_message }
     end
   end
 
   def destroy
-    @song = Song.find(params[:id])
+    song = @group.songs.find(params[:id])
 
-    if @song.destroy
+    if song.destroy
       render status: :ok, json: { status: "ok" }
     else
-      render status: :not_found, json: { status: "error", message: @song.errors.full_messages }
+      render status: :not_found, json: { status: "error", message: song.errors.full_messages }
     end
   end
 
   private
+
+  def set_group
+    @group = Group.find(params[:group_id]) if params[:group_id].present?
+  end
 
   def song_params
     params.require(:song).permit(:title, :artist, :album_image_url, :preview_uri, :spotify_uri, :is_playing, :has_played)

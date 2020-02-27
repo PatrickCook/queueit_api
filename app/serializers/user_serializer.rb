@@ -9,13 +9,6 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
-
-one:
-  name: MyString
-  email: MyString
-  password_digest: MyString
-
-two:
-  name: MyString
-  email: MyString
-  password_digest: MyString
+class UserSerializer < ActiveModel::Serializer
+  attributes :id, :name
+end
